@@ -7,3 +7,12 @@ class Players
         @number=number
         @places_taken=[]
     end
+
+    def players_selection
+        number=gets.chomp
+        number
+    end
+
+
+    def updating_places_taken()
+    end

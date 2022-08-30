@@ -8,9 +8,6 @@ end
 context '#check_owners_dfs' do
 end
 
-context '#display_board' do
-end
-
 context '#find_node' do
 end
 

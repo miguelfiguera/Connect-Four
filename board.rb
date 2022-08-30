@@ -13,6 +13,7 @@ class Board
     def initialize(owner,position,parents=[])
         @position= position
         @owner= owner
+        @color=owner.number
         @parents=parents
         #retrace the parents with the same number, if any.
         #owner by the concept of current player.
@@ -21,12 +22,7 @@ class Board
     def create_square
     end
 
-    def victory?(square,owner)
-        return if square=nil
-        return if square.owner != owner
-        return if occurencies == 4
-
-        #dfs method, so find_node is used here.
+    def check_onwners_dfs(square,owner)
     end
 
     def find_node(position)
@@ -39,7 +35,7 @@ class Board
         position[0].between?(1,7) && position[1].between?(1,6)
     end
 
-    def display_board
+    def victory?(node)
     end
 
 end
