@@ -10,9 +10,17 @@ class Players
 
     def players_selection
         number=gets.chomp
-        number
+        number.to_i if valid_player_input?
     end
 
+    def valid_player_input?(string)
+        valid_inputs=['1','2','3','4','5','6','7']
 
-    def updating_places_taken()
+        if valid_inputs.include?(string)
+            true 
+        else
+            puts "Not valid input, try again. Only numbers."
+            players_selection
+        end
     end
+end

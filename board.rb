@@ -13,16 +13,24 @@ class Board
     def initialize(owner,position,parents=[])
         @position= position
         @owner= owner
-        @color=owner.number
         @parents=parents
         #retrace the parents with the same number, if any.
         #owner by the concept of current player.
     end
 
-    def create_square
+    def create_square(position,current_player)
     end
 
-    def check_onwners_dfs(square,owner)
+    def check_owners_vertical(square,owner)
+    end
+
+    def check_owners_horizontal(square,owner)
+    end
+
+    def check_owners_diagonal_left_to_right(square,owner)
+    end
+
+    def check_owners_diagonal_right_to_left(square,owner)
     end
 
     def find_node(position)

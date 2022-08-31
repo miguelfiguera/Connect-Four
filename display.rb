@@ -1,22 +1,32 @@
 class Display
     attr_accessor :array
 
-
+ @@arrays=[]
     def initialize
-        @array = create_array
+        @one= Array.new(6){'o'}
+        @two= Array.new(6){'o'}
+        @three=Array.new(6){'o'}
+        @four=Array.new(6){'o'}
+        @five=Array.new(6){'o'}
+        @six=Array.new(6){'o'}
+        @seven=Array.new(6){'o'}
     end
 
-    def create_array
-        array=[]
-        x=1
-        y=1
-        loop do
-            array.push(x,y)
-            y+=1 if x == 7
-            x == 7 ? x == 1: x+=1
-            break if array[-1]==[7,6]
-        end
-        array
+    def print_display
+
     end
+
+    def update_display(number,current_player)
+        case 
+        when number == '1'
+        when number == '2'
+        when number == '3'
+        when number == '4'
+        when number == '5'
+        when number == '6'
+        when number == '7'
+        end
+    end
+
 
 end
