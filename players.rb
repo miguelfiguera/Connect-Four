@@ -10,7 +10,7 @@ class Players
 
     def players_selection
         number=gets.chomp
-        number.to_i if valid_player_input?
+        number.to_i if valid_player_input?(number)
     end
 
     def valid_player_input?(string)
