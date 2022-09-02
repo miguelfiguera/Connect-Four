@@ -14,8 +14,7 @@ class Square
         @position= position
         @owner= owner
         @parents=parents
-        #retrace the parents with the same owner, if any.
-        #owner by the concept of current player.
+        @@instances.push(self)
     end
 
 
@@ -25,8 +24,7 @@ class Square
         array=@@instances.select{|node| node.position[0] == num}
     end
 
-    def creating_position
-        num=players_selection
+    def creating_position(num)
         array=my_select(num)
         if array.nil? || array.empty?
             position=[num,1]
@@ -48,14 +46,19 @@ class Square
         parents
     end
 
-    def create_square(current_player)
-        position=creating_position
+    def create_square(current_player,num)
+        position=creating_position(num)
         parents=the_parents_array(position,current_player)
         node=Square.new(current_player,position,parents)
-        @@instances.push(node)
+        #@@instances.push(node)
     end
 
     # Find_node, Valid?, exist?
+
+
+    def valid?(position)
+        position[0].between?(1,7) && position[1].between?(1,6)
+    end
 
     def find_node(position)
         @@instances.each do |node|
@@ -63,9 +66,6 @@ class Square
         end
     end
 
-    def valid?(position)
-        position[0].between?(1,7) && position[1].between?(1,6)
-    end
 
     def exist?(position)
         true if @@instances.any?{|node| node.position == position}
@@ -201,5 +201,4 @@ class Square
     def print_instances
         print @@instances
     end
-    
 end
