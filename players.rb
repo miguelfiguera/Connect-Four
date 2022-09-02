@@ -5,7 +5,6 @@ class Players
     def initialize(name,number)
         @name=name
         @number=number
-        @places_taken=[]
     end
 
     def players_selection

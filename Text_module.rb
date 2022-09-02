@@ -3,11 +3,11 @@ require 'colorize'
 module Text
 
     def greetings
-        puts 'Welcome to this awesome connect four!'
+        puts 'Welcome to this awesome console game of connect four!'
     end
 
-    def choose_your_name_text
-        puts 'How should I call you?'
+    def choose_your_name_text(num)
+        puts "How should I call you Player #{num}? "
     end
 
     def players_turn(player)
