@@ -2,7 +2,7 @@ require_relative 'players.rb'
 require_relative 'Text_module.rb'
 
 class Square
-    include Text_module.rb
+    include Text
     attr_reader :position, :owner
     attr_accessor :parents
 

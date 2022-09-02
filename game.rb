@@ -5,7 +5,6 @@ require_relative 'players.rb'
 
 class Game
     include Text
-    include Squares
     attr_accessor :current_player,:player1,:player2,:display, :current_node
 
 
@@ -43,6 +42,8 @@ class Game
             num=@current_player.players_selection
             @current_node= create_square(@current_player,num)
             @display.update_display(num.to_s)
+            @display.print_display
+
         break if victory?(@current_node,@current_player)
              swap_current_player
         end
@@ -53,7 +54,7 @@ class Game
 
      #turn control
     def swap_current_player
-      @current_player == @player1 ? @current_player==@player2 : @current_player == @player 1
+      @current_player == @player1 ? @current_player==@player2 : @current_player == @player1
     end
 
 
