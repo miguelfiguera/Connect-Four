@@ -19,7 +19,7 @@ module Text
     end
     
     def victory(player)
-        puts "#{players.name} has won!"
+        puts "#{player.name} has won!"
     end
 
     def the_rules

@@ -46,8 +46,8 @@ class Game
             create_square(@current_player,num)
             @display.update_display(num.to_s,@current_player)
             @display.print_display
-       # break if @current_node.victory?(@current_node,@current_player)
-       binding.pry
+            node=@@instances[-1]
+        break if node.victory?(node,@current_player)
             swap_current_player
         end
         victory(@current_player)
@@ -84,7 +84,6 @@ class Game
 
     def create_position(num)
         array=my_select(num)
-        binding.pry
         if array.nil? || array.empty?
             position=[num,1]
         else
@@ -101,14 +100,12 @@ class Game
            
             result = [x,y]
             parent_node=find_node(result) if valid?(result)
-            binding.pry
             parents.push(parent_node) if checking_parent_node(parent_node)
         end
         parents
     end
 
     def checking_parent_node(parent_node)
-        binding.pry
         @current_player
         return false if parent_node.nil?
         return false if exist?(parent_node) == false
@@ -131,12 +128,7 @@ class Game
         true if @@instances.any?{|node| node.position == position}
     end
 
-
     def valid?(position)
         position[0].between?(1,7) && position[1].between?(1,6)
     end
-
-
-
-
 end

@@ -17,9 +17,12 @@ class Square
     # find_node_square
 
     def find_node_square(position)
+        result = ''
         @@instances_square.each do |node|
-           node if node.position== position
+          result= node if node.position== position
         end
+        return if result==''
+        result
     end
 
     #Checking for victory
@@ -31,10 +34,10 @@ class Square
     def check_owners_vertical(node,current_player,count=1)
         value=RETRACEMENT[0]
         parent=find_node_square(single_retrace_calc(node,value))
-        return if parent_node.parents.nil? || parent_node.owner != current_player
-        return true if count==4
+        return true if count==4 
+        return false if parent.nil? || parent.owner != current_player
         count+=1
-        check_owners_vertical(parent,count)
+        check_owners_vertical(parent,current_player,count)
     end
 
     #CHECK HORIZONTAL: Left, Right && Total.
@@ -42,7 +45,7 @@ class Square
     def check_horizontal_left(square,current_player,array=[])
         left = RETRACEMENT[2]
         parent= find_node_square(single_retrace_calc(square,left))
-        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
+        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 3
         array.push(parent)
         check_horizontal_left(parent,current_player,array)
     end
@@ -50,7 +53,7 @@ class Square
     def check_horizontal_right(square,current_player,array=[])
         right = RETRACEMENT[3]
         parent= find_node_square(single_retrace_calc(square,right))
-        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
+        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 3
         array.push(parent)
         check_horizontal_right(parent,current_player,array)
     end
@@ -59,7 +62,7 @@ class Square
         a= check_horizontal_left(square,current_player)
         b= check_horizontal_right(square,current_player)
         c= a+b
-        if c.uniq.all?{|node| node.owner == current_player} && c.length >=4
+        if c.uniq.all?{|node| node.owner == current_player} && c.length >=3
             true
         else
             false
@@ -72,7 +75,7 @@ class Square
         left_down=RETRACEMENT[1]
         parent= find_node_square(single_retrace_calc(square,left_down))
 
-        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
+        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 3
 
         array.push(parent)
         check_left_down(parent,current_player,array)
@@ -83,7 +86,7 @@ class Square
         right_up=RETRACEMENT[4]
         parent= find_node_square(single_retrace_calc(square,right_up))
 
-        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
+        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 3
         
         array.push(parent)
         check_right_up(parent,current_player,array)
@@ -93,7 +96,7 @@ class Square
         a= check_left_down(square,current_player)
         b=check_right_up(square,current_player)
         c = a+b
-        if c.uniq.all?{|node| node.owner == current_player} && c.length >=4
+        if c.uniq.all?{|node| node.owner == current_player} && c.length >=3
             true
         else
             false
@@ -106,7 +109,7 @@ class Square
         right_down=RETRACEMENT[5]
         parent= find_node_square(single_retrace_calc(node,right_down))
 
-        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
+        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 3
 
         array.push(parent)
         check_right_down(parent,current_player,array)
@@ -117,7 +120,7 @@ class Square
         left_up=RETRACEMENT[6]
         parent= find_node_square(single_retrace_calc(node,left_up))
 
-        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
+        return array if parent.nil? || parent.owner != current_player || array.uniq.length == 3
 
         array.push(parent)
         check_left_up(parent,current_player,array)
@@ -128,7 +131,7 @@ class Square
         a=check_right_down(node,current_player)
         b=check_left_up(node,current_player)
         c=a+b 
-        if c.uniq.all?{|node| node.owner == current_player} && c.length >=4
+        if c.uniq.all?{|node| node.owner == current_player} && c.length >=3
             true
         else
             false
@@ -136,7 +139,7 @@ class Square
     end
 
     def victory?(node,current_player)
-        if check_horizontal_total(node,current_player)|| check_owners_vertical(node)
+        if check_horizontal_total(node,current_player)|| check_owners_vertical(node,current_player)
             true
         elsif check_diagonal_left_to_right(node,current_player) || check_diagonal_right_to_left(node,current_player)
             true
