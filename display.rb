@@ -39,25 +39,31 @@ class Display
 
     def changing_array_content(array,current_player,array_index)
         current_player.number == 1 ? array[array_index]=' o '.on_yellow : array[array_index]=' o '.on_red
-        array_index += 1
     end
 
     def update_display(number,current_player)
         case 
         when number == '1'
             changing_array_content(@one,current_player,@index_one)
+            @index_one += 1
         when number == '2'
             changing_array_content(@two,current_player,@index_two)
+            @index_two +=1
         when number == '3'
             changing_array_content(@three,current_player,@index_three)
+            @index_three += 1
         when number == '4'
             changing_array_content(@four,current_player,@index_four)
+            @index_four += 1
         when number == '5'
             changing_array_content(@five,current_player,@index_five)
+            @index_five += 1
         when number == '6'
             changing_array_content(@six,current_player,@index_six)
+            @index_six += 1
         when number == '7'
             changing_array_content(@seven,current_player,@index_seven)
+            @index_seven += 1
         end
     end
 end
