@@ -6,72 +6,25 @@ class Square
     attr_reader :position, :owner
     attr_accessor :parents
 
-    @@instances=[]
-
+    @@instances_square=[]
     RETRACEMENT=[[0,-1],[-1,-1],[-1,0],[1,0],[1,1],[1,-1],[-1,1]]
 
     def initialize(owner,position,parents=[])
         @position= position
         @owner= owner
         @parents=parents
-        @@instances.push(self)
+        @@instances_square.push(self)
     end
 
-
-    #Creating a Square
-
-    def my_select(num)
-        array=@@instances.select{|node| node.position[0] == num}
-    end
-
-    def creating_position(num)
-        array=my_select(num)
-        if array.nil? || array.empty?
-            position=[num,1]
-        else
-            position = [num,(array[-1][1]+1)]
-        end
-        valid?(position) && !exist?(position) ? position : create_square
-    end
-
-    def the_parents_array(position,owner)
-        parents=[]
-        RETRACEMENT.each do |r|
-            x=r[0] + position[0]
-            y=r[1] + position[1]
-
-            parent_node=find_node([x,y])
-            parents.push(parent_node) if parent_node.owner == owner && parent_node != nil
-        end
-        parents
-    end
-
-    def create_square(current_player,num)
-        position=creating_position(num)
-        parents=the_parents_array(position,current_player)
-        node=Square.new(current_player,position,parents)
-        #@@instances.push(node)
-    end
-
-    # Find_node, Valid?, exist?
+    # find_node_square
 
 
-    def valid?(position)
-        position[0].between?(1,7) && position[1].between?(1,6)
-    end
 
-    def find_node(position)
-        @@instances.each do |node|
+    def find_node_square(position)
+        @@instances_square.each do |node|
            node if node.position== position
         end
     end
-
-
-    def exist?(position)
-        true if @@instances.any?{|node| node.position == position}
-    end
-
-
 
     #Checking for victory
 
@@ -81,7 +34,7 @@ class Square
 
     def check_owners_vertical(node,current_player,count=1)
         value=RETRACEMENT[0]
-        parent=find_node(single_retrace_calc(node,value))
+        parent=find_node_square(single_retrace_calc(node,value))
         return if parent_node.parents.nil? || parent_node.owner != current_player
         return true if count==4
         count+=1
@@ -92,7 +45,7 @@ class Square
 
     def check_horizontal_left(square,current_player,array=[])
         left = RETRACEMENT[2]
-        parent= find_node(single_retrace_calc(square,left))
+        parent= find_node_square(single_retrace_calc(square,left))
         return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
         array.push(parent)
         check_horizontal_left(parent,current_player,array)
@@ -100,7 +53,7 @@ class Square
 
     def check_horizontal_right(square,current_player,array=[])
         right = RETRACEMENT[3]
-        parent= find_node(single_retrace_calc(square,right))
+        parent= find_node_square(single_retrace_calc(square,right))
         return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
         array.push(parent)
         check_horizontal_right(parent,current_player,array)
@@ -123,7 +76,7 @@ class Square
 
     def check_left_down(square,current_player,array=[])
         left_down=RETRACEMENT[1]
-        parent= find_node(single_retrace_calc(square,left_down))
+        parent= find_node_square(single_retrace_calc(square,left_down))
 
         return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
 
@@ -134,7 +87,7 @@ class Square
 
     def check_right_up(square,current_player,array=[])
         right_up=RETRACEMENT[4]
-        parent= find_node(single_retrace_calc(square,right_up))
+        parent= find_node_square(single_retrace_calc(square,right_up))
 
         return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
         
@@ -157,7 +110,7 @@ class Square
 
     def check_right_down(node,current_player,array=[])
         right_down=RETRACEMENT[5]
-        parent= find_node(single_retrace_calc(node,right_down))
+        parent= find_node_square(single_retrace_calc(node,right_down))
 
         return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
 
@@ -168,7 +121,7 @@ class Square
 
     def check_left_up(node,current_player,array=[])
         left_up=RETRACEMENT[6]
-        parent= find_node(single_retrace_calc(node,left_up))
+        parent= find_node_square(single_retrace_calc(node,left_up))
 
         return array if parent.nil? || parent.owner != current_player || array.uniq.length == 4
 

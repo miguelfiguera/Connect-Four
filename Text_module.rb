@@ -10,10 +10,14 @@ module Text
         puts "How should I call you Player #{num}? "
     end
 
-    def players_turn(player)
-        puts "It is #{players.name}'s turn."
+    def players_turn
+        puts "It is #{@current_player.name}'s turn."
     end
 
+    def choose_text
+        puts "Choose a number between 1 & 7."
+    end
+    
     def victory(player)
         puts "#{players.name} has won!"
     end

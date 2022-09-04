@@ -1,3 +1,5 @@
+
+require"pry"
 class Players
     attr_reader :name,:number
     attr_accessor :places_taken
