@@ -1,5 +1,4 @@
 
-require"pry"
 class Players
     attr_reader :name,:number
     attr_accessor :places_taken
@@ -13,7 +12,7 @@ class Players
     # Players Choices
 def players_selection
     number=gets.chomp
-    number.to_i if valid_player_input?(number)
+    valid_player_input?(number) ? number.to_i : players_selection
 end
 
 def valid_player_input?(string)
@@ -23,7 +22,7 @@ def valid_player_input?(string)
         true 
     else
         puts "Not valid input, try again. Only numbers."
-        players_selection
+        false
     end
 end
 

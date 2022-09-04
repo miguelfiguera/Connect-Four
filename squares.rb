@@ -1,8 +1,6 @@
 require_relative 'players.rb'
-require_relative 'Text_module.rb'
 
 class Square
-    include Text
     attr_reader :position, :owner
     attr_accessor :parents
 
@@ -17,8 +15,6 @@ class Square
     end
 
     # find_node_square
-
-
 
     def find_node_square(position)
         @@instances_square.each do |node|
@@ -69,8 +65,6 @@ class Square
             false
         end
     end
-
-
 
     #CHECK DIAGONAL LEFT TO RIGHT
 
